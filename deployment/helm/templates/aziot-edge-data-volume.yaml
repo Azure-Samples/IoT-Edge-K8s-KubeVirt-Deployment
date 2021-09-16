@@ -1,0 +1,15 @@
+# # This example assumes you are using a default storage class
+# apiVersion: cdi.kubevirt.io/v1beta1
+# kind: DataVolume
+# metadata:
+#   name: {{ .Values.prefix }}-iotedge-ubuntu1804-dv
+# spec:
+#   source:
+#     http:
+#       url: https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
+#   pvc:
+#     accessModes:
+#       - ReadWriteOnce
+#     resources:
+#       requests:
+#         storage: {{ .Values.aziotEdgeVmDiskSize }}

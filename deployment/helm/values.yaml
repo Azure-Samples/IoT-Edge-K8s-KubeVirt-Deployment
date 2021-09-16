@@ -1,0 +1,11 @@
+# Replica count of the deployment.
+aziotEdgeVmDiskSize: 4Gi
+
+# Flag to create K8s service/LB to allow ssh into the VM via public Ip.
+aziotEdgeVmEnableExternalSsh: true
+
+# Prefix used to create VM resources e.g. vm, data volumes, load balancer services.
+prefix: aziotedge
+
+# SSH public key to access the VM.
+cloudInitVmScriptFile: cloud-init-vm-script.txt

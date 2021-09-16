@@ -1,0 +1,9 @@
+You have installed release {{ .Chart.Version}} of {{ .Chart.Name }}.
+
+To learn more about the release, try:
+
+  $ helm status {{ .Release.Name }}
+  $ helm get all {{ .Release.Name }}
+
+To connect to the newly created IoT Edge VM in K8s, try:
+  $ ssh ubuntu@<public IP of service {{ .Values.prefix }}-aziot-edge-vm-ssh-service>

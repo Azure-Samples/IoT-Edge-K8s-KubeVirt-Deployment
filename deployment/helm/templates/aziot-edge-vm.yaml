@@ -1,0 +1,44 @@
+apiVersion: kubevirt.io/v1alpha3
+kind: VirtualMachine
+metadata:
+  generation: 1
+  labels:
+    kubevirt.io/os: linux
+  name: {{ .Values.prefix }}-ubuntu20
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: {{ .Values.prefix }}-aziot-edge-vm
+    spec:
+      nodeSelector:
+        # TODO: Change nested to virtualization for clarity.
+        nested: "true"
+      domain:        
+        cpu:
+          cores: 2
+        devices:
+          disks:
+          - disk:
+              # This makes it exposed as /dev/vda disk attached to the VM.
+              bus: virtio
+            name: bootdisk            
+          - cdrom:
+              bus: sata              
+            name: cloudinitdisk
+        machine:
+          type: q35
+        resources:
+          requests:
+            memory: 2048M
+      volumes:
+      - dataVolume:
+         name: {{ .Values.prefix }}-iotedge-ubuntu1804-dv
+        name: bootdisk
+      - name: cloudinitdisk
+      # https://kubevirt.io/user-guide/virtual_machines/startup_scripts/#cloud-init-userdata-as-k8s-secret
+      # https://kubevirt.io/user-guide/virtual_machines/disks_and_volumes/#cloudinitnocloud
+        cloudInitNoCloud:
+          secretRef:
+            name: {{ .Values.prefix }}-vm-cloudconfig
