@@ -2,8 +2,10 @@
 # https://kubevirt.io/user-guide/virtual_machines/disks_and_volumes/#datavolume
 apiVersion: cdi.kubevirt.io/v1beta1
 kind: DataVolume
-metadata:
-  name: {{ .Values.prefix }}-iotedge-ubuntu1804-dv
+metadata: 
+  name: {{ include "aziotedgevm.name" . }}-ubuntu1804-dv
+  labels:
+  {{ include "aziotedgevm.labels" . | indent 4}}
 spec:
   source:
     registry:

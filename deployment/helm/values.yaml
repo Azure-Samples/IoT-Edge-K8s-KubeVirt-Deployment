@@ -1,11 +1,14 @@
-# Replica count of the deployment.
+# VM's Data Volume size.
 aziotEdgeVmDiskSize: 4Gi
 
-# Flag to create K8s service/LB to allow ssh into the VM via public Ip.
+# Flag to create K8s service/LB to allow ssh into the VM via public IP.
 aziotEdgeVmEnableExternalSsh: true
 
-# Prefix used to create VM resources e.g. vm, data volumes, load balancer services.
-prefix: aziotedge
+# Override prefix of resource created, defaults to chart name, truncated by 40 chars.
+nameOverride:
 
 # SSH public key to access the VM.
-cloudInitVmScriptFile: cloud-init-vm-script.txt
+publicSshKey: "none"
+
+# Config file for IoT Edge runtime.
+azIotEdgeConfigFile: config.toml

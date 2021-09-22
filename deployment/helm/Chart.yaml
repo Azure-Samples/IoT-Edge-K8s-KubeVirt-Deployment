@@ -1,6 +1,6 @@
 apiVersion: v2
 name: aziot-edge-kubevirt
-description: A Helm chart for deploying Azure IoT Edge on K8s as Kubevirt VM.
+description: A Helm chart for deploying Azure IoT Edge on K8s as a KubeVirt VM.
 keywords:
     - aziot
     - kubevirt

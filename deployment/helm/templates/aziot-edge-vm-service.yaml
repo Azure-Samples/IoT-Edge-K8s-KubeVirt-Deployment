@@ -1,13 +1,14 @@
-# Create external access only when enabled by the end user via Helm configuration.
 {{- if eq .Values.aziotEdgeVmEnableExternalSsh true }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.prefix }}-aziot-edge-vm-ssh-service
+  labels:
+  {{ include "aziotedgevm.labels" . | indent 4}}
+  name: {{ include "aziotedgevm.name" . }}-vm-ssh-service
 spec:
   externalTrafficPolicy: Cluster
   selector:
-    kubevirt.io/domain: {{ .Values.prefix }}-aziot-edge-vm
+    kubevirt.io/domain: {{ include "aziotedgevm.name" . }}-vm
   ports:
     - name: ssh
       protocol: TCP

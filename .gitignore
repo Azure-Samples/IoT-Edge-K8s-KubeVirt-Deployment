@@ -1,0 +1,3 @@
+# Sensitive Files
+*.toml
+cloud-init-vm-script.txt

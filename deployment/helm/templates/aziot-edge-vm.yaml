@@ -4,18 +4,19 @@ metadata:
   generation: 1
   labels:
     kubevirt.io/os: linux
-  name: {{ .Values.prefix }}-ubuntu20
+  name: {{ include "aziotedgevm.name" . }}-ubuntu1804
 spec:
   running: true
   template:
     metadata:
       labels:
-        kubevirt.io/domain: {{ .Values.prefix }}-aziot-edge-vm
+      {{ include "aziotedgevm.labels" . | indent 8}}
+        kubevirt.io/domain: {{ include "aziotedgevm.name" . }}-vm
     spec:
-      nodeSelector:
-        # TODO: Change nested to virtualization for clarity.
-        nested: "true"
-      domain:        
+      # nodeSelector:
+      #   # TODO: Change nested to virtualization for clarity.
+      #   nested: "true"
+      domain:
         cpu:
           cores: 2
         devices:
@@ -23,10 +24,14 @@ spec:
           - disk:
               # This makes it exposed as /dev/vda disk attached to the VM.
               bus: virtio
-            name: bootdisk            
+            name: bootdisk
+          - disk: {}              
+            name: aziotedgeconfigdisk
+            # set serial
+            serial: D23YZ9W6WA5DJ487
           - cdrom:
-              bus: sata              
-            name: cloudinitdisk
+              bus: sata
+            name: cloudinitdisk        
         machine:
           type: q35
         resources:
@@ -34,11 +39,14 @@ spec:
             memory: 2048M
       volumes:
       - dataVolume:
-         name: {{ .Values.prefix }}-iotedge-ubuntu1804-dv
+         name: {{ include "aziotedgevm.name" . }}-ubuntu1804-dv
         name: bootdisk
+      - name: aziotedgeconfigdisk
+        secret:
+          secretName: {{ include "aziotedgevm.name" . }}-vm-aziotedgeconfig
       - name: cloudinitdisk
       # https://kubevirt.io/user-guide/virtual_machines/startup_scripts/#cloud-init-userdata-as-k8s-secret
       # https://kubevirt.io/user-guide/virtual_machines/disks_and_volumes/#cloudinitnocloud
         cloudInitNoCloud:
-          secretRef:
-            name: {{ .Values.prefix }}-vm-cloudconfig
+          secretRef:          
+            name: sun-vm-aziotedgeconfig
