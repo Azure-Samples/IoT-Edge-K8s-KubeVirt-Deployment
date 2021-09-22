@@ -48,5 +48,5 @@ spec:
       # https://kubevirt.io/user-guide/virtual_machines/startup_scripts/#cloud-init-userdata-as-k8s-secret
       # https://kubevirt.io/user-guide/virtual_machines/disks_and_volumes/#cloudinitnocloud
         cloudInitNoCloud:
-          secretRef:          
-            name: sun-vm-aziotedgeconfig
+          secretRef:
+          name: {{ include "aziotedgevm.name" . }}-vm-aziotedgeconfig            
