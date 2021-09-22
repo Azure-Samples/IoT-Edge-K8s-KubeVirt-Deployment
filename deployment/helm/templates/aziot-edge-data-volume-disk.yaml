@@ -2,15 +2,14 @@
 # https://kubevirt.io/user-guide/virtual_machines/disks_and_volumes/#datavolume
 apiVersion: cdi.kubevirt.io/v1beta1
 kind: DataVolume
-metadata: 
+metadata:
   name: {{ include "aziotedgevm.name" . }}-ubuntu1804-dv
   labels:
   {{ include "aziotedgevm.labels" . | indent 4}}
 spec:
   source:
-    registry:
-      #url: "docker://suneetnangia/ubuntu-container-disk"
-      url: "docker://tedezed/ubuntu-container-disk:18.0"
+    http:
+      url: https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
   pvc:
     accessModes:
       - ReadWriteOnce

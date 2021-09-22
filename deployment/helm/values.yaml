@@ -5,7 +5,7 @@ aziotEdgeVmDiskSize: 4Gi
 aziotEdgeVmEnableExternalSsh: true
 
 # Override prefix of resource created, defaults to chart name, truncated by 40 chars.
-nameOverride:
+nameOverride: aziot-edge-kubevirt
 
 # SSH public key to access the VM.
 publicSshKey: "none"

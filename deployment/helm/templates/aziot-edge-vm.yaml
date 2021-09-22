@@ -49,4 +49,4 @@ spec:
       # https://kubevirt.io/user-guide/virtual_machines/disks_and_volumes/#cloudinitnocloud
         cloudInitNoCloud:
           secretRef:
-          name: {{ include "aziotedgevm.name" . }}-vm-aziotedgeconfig            
+            name: {{ .Values.nameOverride }}-vm-cloudconfig # TODO: we should be using {{ include "aziotedgevm.name" . }} here instead but that fails, needs further investigation.

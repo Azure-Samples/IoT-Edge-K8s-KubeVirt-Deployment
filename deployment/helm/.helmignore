@@ -21,5 +21,5 @@
 .idea/
 *.tmproj
 .vscode/
-# IoT Config
-aziot-edge-data-volume.yaml
+# Ignore disk based data volume for now as it takes ~30 mins to import.
+aziot-edge-data-volume-disk.yaml
