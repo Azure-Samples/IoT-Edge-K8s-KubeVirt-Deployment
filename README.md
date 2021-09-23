@@ -108,6 +108,5 @@ Azure Arc allows you to manage K8s cluster via Azure management plane, this docu
 
 ## Further Work
 
-1. Pre-create docker image with Ubuntu 18.04 LTS disk attached to it, this saves time during Data Volume creation.
-2. Validate use of AMD EPYC/Ryzen for nested virtualization.
-3. Expand on K8s re-balancing and IoT Edge VM eviction impact/policy.
+1. Validate use of AMD EPYC/Ryzen for nested virtualization.
+2. Expand on K8s re-balancing and IoT Edge VM eviction impact/policy.
