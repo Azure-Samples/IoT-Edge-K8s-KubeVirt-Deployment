@@ -8,7 +8,7 @@ There are two primary reasons why we may want to run IoT Edge on K8s cluster, th
 
 IoT Edge runtime is designed to run on a machine (virtual or bare metal) with a supported Linux OS on it, therefore the easiest way to run it on K8s will be to host it inside a Linux VM on K8s. [KubeVirt](http://kubevirt.io/) a CNCF adopted project enables hosting of VMs in K8s cluster along side containers, creating a high density container and VM hosting platform. KubeVirt is a virtualization extension for K8s which makes use of Custom Resource Definition to add VM and other related resource types to the K8s cluster.
 
-This solution implements a "lift and shift" approach and it does not need any changes in IoT Edge runtime or configuration to run inside the VM on K8s, making it a simple and compatible option out of the box. In this instance, we are making use of Azure's K8s service called Azure Kubernetes Service (AKS) for the ease of demonstration but the solution is applicable to other K8s managed or unmanaged deployments as well.
+This solution implements a "lift and shift" approach and it does not need any changes in IoT Edge runtime or configuration to run inside the VM on K8s, making it a simple and compatible option out of the box. In this example, we are making use of Azure's K8s service called Azure Kubernetes Service (AKS) for the ease of demonstration but the solution is applicable to other K8s managed or unmanaged deployments as well.
 
 Following architecture explains the way various components are connected together to enable IoT Edge runtime hosted in a VM.
 
@@ -18,9 +18,9 @@ Following architecture explains the way various components are connected togethe
 
 ### Prerequisites
 
-1. Nested Virtualization Enabled Node Pool: This a required to allow VM level virtualization on K8 nodes, Virtual/Physical machines with CPUs featuring Intel VT-x and EPT technology or AMD EPYC/Ryzen support nested virtualization. For Azure, please refer to the [VM list](https://docs.microsoft.com/en-us/azure/virtual-machines/acu) here. Alternatively, you should be able to emulate virtualisation for dev/test environments, this is not recommended for production/high performance/isolated requirements.
+1. Nested Virtualization Enabled Node Pool: This a required to allow VM level virtualization on K8s nodes, Virtual/Physical machines with CPUs featuring Intel VT-x and EPT technology or AMD EPYC/Ryzen support nested virtualization. If you are using AKS for K8s as in this example, please refer to the VM list [list](https://docs.microsoft.com/en-us/azure/virtual-machines/acu). Alternatively, you should be able to emulate virtualisation for dev/test environments, this is not recommended for production/high performance/isolated requirements.
 2. [KubeVirt](https://kubevirt.io/user-guide/operations/installation/)
-3. [CDI (Containerized Data Importer)](https://github.com/kubevirt/containerized-data-importer) add-on must be installed on the K8s cluster. CDI is required to mount the data volume which includes VM disk (e.g. Ubuntu VM disk)
+3. [CDI (Containerized Data Importer)](https://github.com/kubevirt/containerized-data-importer) add-on must be installed on the K8s cluster. CDI is required to mount the data volume which includes VM disk (e.g. Ubuntu 18.04 LTS disk)
 
 ### Create AKS Cluster with Prerequisites
 
@@ -85,7 +85,7 @@ When running IoT Edge in production environment, it's important ensure system is
 We discuss some of those concerns below:
 
 1. EdgeHub Data Persistence: IoT Edge's EdgeHub messaging component saves messages on a disk, if this disk is ephemeral, messages will be lost if VM is restarted. Data Volume in KubeVirt allows you to persisted this data on a PVC under the hoods, preventing data loss for messages. It is important to note that the data volume (and its corresponding PVC) is backed by a node in a cluster which is still a single point of failure unless PVCs are created on top of other resilient storage solutions e.g. [StorageOS](https://storageos.com/).
-2. IoT Edge VM Compute Resilience: In high density application hosting platforms like K8s, it's expected that nodes may dynamically appear/disappear in the cluster or cluster is re-balancing the workloads on regular basis. In such situations, IoT Edge VM created in KubeVirt will be deployed to a different node in the K8s cluster, detaching itself from Data Volume/PVC on the previous node. Detaching Data Volume/PVC from IoT Edge VM pod will result in failure to start that VM on a new node. Please refer to KubeVirt's [advance scheduling article](https://kubevirt.io/2020/Advanced-scheduling-with-affinity-rules.html) for more details.
+2. IoT Edge VM Compute Resilience: In high density application hosting platforms like K8s, it's expected that nodes may dynamically appear/disappear in the cluster or cluster is re-balancing the workloads on regular basis. In such situations, IoT Edge VM created in KubeVirt will be deployed to a different node in the K8s cluster, detaching itself from Data Volume/PVC on the previous node. Detaching Data Volume/PVC from IoT Edge VM pod will result in failure to start that VM on a new node. Please refer to KubeVirt's [advance scheduling article](https://kubevirt.io/2020/Advanced-scheduling-with-affinity-rules.html) and [node maintenance](https://kubevirt.io/user-guide/operations/node_maintenance/) for more details.
 
 ### Commercial Support
 
@@ -103,7 +103,8 @@ Azure Arc allows you to manage K8s cluster via Azure management plane, this docu
 ## Technical References
 
 1. [NA KubeCon 2019](https://kubevirt.io/2020/KubeVirt_Intro-Virtual_Machine_Management_on_Kubernetes.html)
-2. [Medium Article by Alessandro Vozza](https://medium.com/cooking-with-azure/using-kubevirt-in-azure-kubernetes-service-part-1-8771bfb94d7)
+2. [Medium article by Alessandro Vozza](https://medium.com/cooking-with-azure/using-kubevirt-in-azure-kubernetes-service-part-1-8771bfb94d7)
+3. [KubeVirt Image Generation](https://github.com/Tedezed/kubevirt-images-generator)
 
 ## Further Work
 
