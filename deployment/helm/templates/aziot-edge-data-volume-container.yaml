@@ -3,13 +3,13 @@
 apiVersion: cdi.kubevirt.io/v1beta1
 kind: DataVolume
 metadata: 
-  name: {{ include "aziotedgevm.name" . }}-ubuntu1804-dv
+  name: {{ include "aziotedgevm.name" . }}-linux-dv
   labels:
   {{ include "aziotedgevm.labels" . | indent 4}}
 spec:
   source:
-    registry:      
-      url: "docker://suneetnangia/ubuntu-container-disk:18.0"
+    registry:
+      url: "docker://suneetnangia/ubuntu-container-disk:18.04"
   pvc:
     accessModes:
       - ReadWriteOnce

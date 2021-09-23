@@ -4,7 +4,7 @@ metadata:
   generation: 1
   labels:
     kubevirt.io/os: linux
-  name: {{ include "aziotedgevm.name" . }}-ubuntu1804
+  name: {{ include "aziotedgevm.name" . }}-linux
 spec:
   running: true
   template:
@@ -39,7 +39,7 @@ spec:
             memory: 2048M
       volumes:
       - dataVolume:
-         name: {{ include "aziotedgevm.name" . }}-ubuntu1804-dv
+         name: {{ include "aziotedgevm.name" . }}-linux-dv
         name: bootdisk
       - name: aziotedgeconfigdisk
         secret:

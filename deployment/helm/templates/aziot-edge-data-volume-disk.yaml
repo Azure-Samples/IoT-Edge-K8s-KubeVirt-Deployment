@@ -4,13 +4,13 @@
 apiVersion: cdi.kubevirt.io/v1beta1
 kind: DataVolume
 metadata:
-  name: {{ include "aziotedgevm.name" . }}-ubuntu1804-dv
+  name: {{ include "aziotedgevm.name" . }}-linux-dv
   labels:
   {{ include "aziotedgevm.labels" . | indent 4}}
 spec:
   source:
     http:
-      url: https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
+      url: https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
   pvc:
     accessModes:
       - ReadWriteOnce
