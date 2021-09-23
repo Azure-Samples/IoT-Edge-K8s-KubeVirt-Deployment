@@ -8,7 +8,7 @@ aziotEdgeVmEnableExternalSsh: true
 nameOverride: aziot-edge-kubevirt
 
 # SSH public key to access the VM.
-publicSshKey: "none"
+publicSshKey: ""
 
-# Config file for IoT Edge runtime.
-azIotEdgeConfigFile: config.toml
+# Config content for IoT Edge runtime.
+azIotEdgeConfig: ""
