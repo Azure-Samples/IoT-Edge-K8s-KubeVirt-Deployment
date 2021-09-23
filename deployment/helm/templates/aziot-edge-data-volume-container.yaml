@@ -8,9 +8,8 @@ metadata:
   {{ include "aziotedgevm.labels" . | indent 4}}
 spec:
   source:
-    registry:
-      # TODO: Replace this with new a container image, build from scratch.
-      url: "docker://tedezed/ubuntu-container-disk:18.0"
+    registry:      
+      url: "docker://suneetnangia/ubuntu-container-disk:18.0"
   pvc:
     accessModes:
       - ReadWriteOnce

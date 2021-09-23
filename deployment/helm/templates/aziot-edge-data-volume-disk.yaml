@@ -1,5 +1,6 @@
 # This example assumes you are using a default storage class
 # https://kubevirt.io/user-guide/virtual_machines/disks_and_volumes/#datavolume
+# This method of creating data volume is not currently used, we use container disk (via aziot-edge-data-volume-container.yaml) with preinstalled Ubuntu 18.04 and IoT Edge binaries.
 apiVersion: cdi.kubevirt.io/v1beta1
 kind: DataVolume
 metadata:
