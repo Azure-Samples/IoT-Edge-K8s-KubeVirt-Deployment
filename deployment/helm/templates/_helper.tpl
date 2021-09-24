@@ -63,8 +63,13 @@ bootcmd:
   - "mkdir /mnt/app-secret"
   - "mount /dev/$(lsblk --nodeps -no name,serial | grep D23YZ9W6WA5DJ487 | cut -f1 -d' ') /mnt/app-secret"
 
-# Once VM is started following command will install Moby Engine and IoT Edge.
-# There's a possibility to achieve the below package deployment via packages cloud-init construct instead but they dont run in order.
+# Once VM is started following command will install Moby Engine, IoT Edge and configure config.toml content from K8s secret.
+# There's a possibility to achieve the below package deployment via packages cloud-init construct instead but they don't run in order.
 runcmd:
-  - sudo apt-get update && sudo apt-get install -y moby-engine && sudo apt-get update && sudo apt-get install -y aziot-edge && sudo cp /mnt/app-secret/userdata /etc/aziot/config.toml && sudo iotedge config apply
+  - sudo apt-get update
+  - sudo apt-get install -y moby-engine
+  - sudo apt-get update
+  - sudo apt-get install -y aziot-edge
+  - sudo cp /mnt/app-secret/userdata /etc/aziot/config.toml
+  - sudo iotedge config apply
 {{- end -}}

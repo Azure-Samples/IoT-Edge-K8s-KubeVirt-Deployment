@@ -12,13 +12,10 @@ spec:
       labels:
       {{ include "aziotedgevm.labels" . | indent 8}}
         kubevirt.io/domain: {{ include "aziotedgevm.name" . }}-vm
-    spec:
-      # nodeSelector:
-      #   # TODO: Change nested to virtualization for clarity.
-      #   nested: "true"
+    spec:  
       domain:
         cpu:
-          cores: 2
+          cores: 4
         devices:
           disks:
           - disk:
@@ -36,7 +33,8 @@ spec:
           type: q35
         resources:
           requests:
-            memory: 2048M
+            # 12G
+            memory: 12288M
       volumes:
       - dataVolume:
          name: {{ include "aziotedgevm.name" . }}-linux-dv

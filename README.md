@@ -65,11 +65,11 @@ Use the following Azure CLI commands to create AKS cluster with all the prerequi
 Setting Helm Chart Values:
 | Flag  | Default  | Description  |
 |---|---|---|
-| azIotEdgeConfig | empty  |  IoT Edge configuration file (usually config.toml) containing credentials to connect to IoT Hub, this file is converted into base64 format and stored in as a K8s secret. |
+| azIotEdgeConfig | empty  |  IoT Edge configuration file (usually config.toml) location, containing credentials to connect to IoT Hub, this file is converted into base64 format and stored in as a K8s secret. |
 | publicSshKey | empty | Public SSH key configured on IoT Edge VM to allow remote access. |
 | aziotEdgeVmEnableExternalSsh | true | Flag to create K8s service with external load balancer and public Ip in AKS, this enables ssh on public IP |
 | aziotEdgeVmDiskSize | 4Gi | Disk size of IoT Edge VM where runtime and edge modules are deployed. |
-| nameOverride | aziot-edge-kubevirt | Overrides prefix which is used in naming the resources in K8s. Defaults to Helm chart name. |
+| nameOverride | aziot-edge-kubevirt | Overrides prefix which is used in naming the resources in K8s. Replace it with a different name if you are installing helm chart multiple times. |
 
 Once helm deployment is complete, following artifacts are created in K8s cluster:
 
