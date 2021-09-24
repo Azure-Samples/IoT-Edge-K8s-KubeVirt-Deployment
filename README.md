@@ -104,6 +104,8 @@ Azure Arc allows you to manage K8s cluster via Azure management plane, this docu
 
 1. [NA KubeCon 2019](https://kubevirt.io/2020/KubeVirt_Intro-Virtual_Machine_Management_on_Kubernetes.html)
 2. [Medium article by Alessandro Vozza](https://medium.com/cooking-with-azure/using-kubevirt-in-azure-kubernetes-service-part-1-8771bfb94d7)
+3. [GPU Workloads on KubeVirt](https://kubevirt.io/2020/KubeVirt_deep_dive-virtualized_gpu_workloads.html)
+4. [Storage Resilience for KubeVirt](https://storageos.com/what-is-kubevirt-why-it-benefits-persistent-storage)
 
 ## Further Work
 
