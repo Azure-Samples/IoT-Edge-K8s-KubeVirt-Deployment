@@ -28,13 +28,20 @@ spec:
             serial: D23YZ9W6WA5DJ487
           - cdrom:
               bus: sata
-            name: cloudinitdisk        
+            name: cloudinitdisk
+          interfaces:
+          - masquerade: {}
+            macAddress: fe:7e:48:a0:7d:22
+            name: default         
         machine:
           type: q35
         resources:
           requests:
             # 4GB
             memory: 4096M
+      networks:
+      - name: default
+        pod: {}
       volumes:
       - dataVolume:
          name: {{ include "aziotedgevm.name" . }}-linux-dv
