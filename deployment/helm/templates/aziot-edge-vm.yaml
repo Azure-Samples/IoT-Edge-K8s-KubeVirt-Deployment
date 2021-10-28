@@ -31,7 +31,7 @@ spec:
             name: cloudinitdisk
           interfaces:
           - masquerade: {}
-            macAddress: fe:7e:48:a0:7d:22
+            macAddress: {{ .Values.macAddress }}
             name: default         
         machine:
           type: q35
