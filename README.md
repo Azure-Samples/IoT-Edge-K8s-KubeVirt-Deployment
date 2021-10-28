@@ -71,6 +71,7 @@ Setting Helm Chart Values:
 | aziotEdgeVmDiskSize | 4Gi | Disk size of IoT Edge VM where runtime and edge modules are deployed. |
 | nameOverride | aziot-edge-kubevirt | Overrides prefix which is used in naming the resources in K8s. Replace it with a different name if you are installing helm chart multiple times. |
 | macAddress | fe:7e:48:a0:7d:22 | Static MAC address of the VM instance to be created, it does not change when VM is restarted.
+
 Once helm deployment is complete, following artifacts are created in K8s cluster:
 
 1. KubeVirt data volume (backed by [PVC](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)) which contains a vm disk with ubuntu 18.04 LTS preinstalled on it.
