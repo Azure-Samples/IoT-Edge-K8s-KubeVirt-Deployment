@@ -71,5 +71,18 @@ runcmd:
   - sudo apt-get update
   - sudo apt-get install -y aziot-edge
   - sudo cp /mnt/app-secret/userdata /etc/aziot/config.toml
+  {{- if .Values.rootCA }}
+  - sudo cp /mnt/app-secret/rootca /usr/local/share/ca-certificates/{{ .Values.rootCAName }}.crt
+  - sudo update-ca-certificates
+  - sudo systemctl restart docker
+  - sudo mkdir -p /etc/aziot/certificates
+  - sudo cp /mnt/app-secret/rootca /etc/aziot/certificates/{{ .Values.rootCAName }}
+  {{- end }}
+  {{- if .Values.deviceCACert }}
+  - sudo cp /mnt/app-secret/devicecert /etc/aziot/certificates/{{ .Values.deviceCACertName }}
+  {{- end }}
+  {{- if .Values.deviceCAKey }}
+  - sudo cp /mnt/app-secret/devicekey /etc/aziot/certificates/{{ .Values.deviceCAKeyName }}
+  {{- end }}
   - sudo iotedge config apply
 {{- end -}}
