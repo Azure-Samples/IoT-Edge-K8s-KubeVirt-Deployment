@@ -71,13 +71,19 @@ Setting Helm Chart Values:
 | aziotEdgeVmDiskSize | 4Gi | Disk size of IoT Edge VM where runtime and edge modules are deployed. |
 | nameOverride | aziot-edge-kubevirt | Overrides prefix which is used in naming the resources in K8s. Replace it with a different name if you are installing helm chart multiple times. |
 | macAddress | fe:7e:48:a0:7d:22 | Static MAC address of the VM instance to be created, it does not change when VM is restarted.
+| rootCA | empty | Root CA certificate file location. This file is converted into base64 format and stored in as a K8s secret. If empty, the IoT Edge runtime creates temporary certificate. See [Manage certificates on an IoT Edge device](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-manage-device-certificates) for more details. |
+| rootCAName | azure-iot.root.ca.cert.pem | Root CA certificate file name that will be copied to /etc/aziot/certificates/ directory on KubeVirt VM. |
+| deviceCACert | empty | Device CA certificate. This file is converted into base64 format and stored in as a K8s secret. If empty, the IoT Edge runtime creates temporary certificate. |
+| deviceCACertName | iot-edge-device.full-chain.cert.pem | Device CA certificate file name that will be copied to /etc/aziot/certificates/ directory on KubeVirt VM. |
+| deviceCAKey | empty | Device CA private key. This file is converted into base64 format and stored in as a K8s secret. If empty, the IoT Edge runtime creates temporary certificate. |
+| deviceCAKeyName | iot-edge-device.key.pem | Device CA private key file name that will be copied to /etc/aziot/certificates/ directory on KubeVirt VM. |
 
 Once helm deployment is complete, following artifacts are created in K8s cluster:
 
 1. KubeVirt data volume (backed by [PVC](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)) which contains a vm disk with ubuntu 18.04 LTS preinstalled on it.
 2. KubeVirt VM (and corresponding VM Instance) which makes use of the data volume created above.
 3. K8s Service with external load balancer and public IP to access the VM from remote clients with a configured public ssh key.
-4. K8s secret containing IoT Edge config file contents, mounted as drive on VM.
+4. K8s secret containing IoT Edge config file and certificates contents, mounted as drive on VM.
 5. K8s secret containing cloud-init configuration to configure public SSH key and configure/install IoT Edge runtime on the VM.
 
 ## Production Readiness
