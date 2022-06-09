@@ -115,7 +115,8 @@ The environment where we are running KubeVirt looks as follows:
 
 - Hardware specs: Standard F4s v2 (4 vcpus, 8 GiB memory).
 - OS: Linux (ubuntu 20.04).
-- k8s version: v1.23.2+k3s1.
+- Swap memory disabled.
+- k8s version: [K3s](https://rancher.com/docs/k3s/latest/en/) v1.23.2+k3s1.
 - KubeVirt VM image: [Ubuntu 18.04 LTS](https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img).
 - KubeVirt operator version `v0.49.0`.
 - KubeVirt custom resource: `virt-controller` and `virt-api` patched to deploy 1 replica.
@@ -123,14 +124,24 @@ The environment where we are running KubeVirt looks as follows:
 - KubeVirt Virtual Machine: 2 CPU cores and 1GB of memory is allocated to this VM.
 - IoT edge modules running on the VM: edge-agent and edge-hub.
 
-The table below summarizes the resource footprint with the setup just described. These metrics have been obtained using [sysstat](https://man7.org/linux/man-pages/man5/sysstat.5.html), taking the average value of 10 samples over 10 seconds.
+The table below summarizes the resource footprint with the setup just described. These metrics have been obtained running [sysstat](https://man7.org/linux/man-pages/man5/sysstat.5.html) on the k8s node, taking the average value of 10 samples over 10 seconds.
 
 | Metric     | No KubeVirt | KubeVirt | Delta |
 | :---       | :----   | :--- | :--- |
 | CPU Used   | 2.09%   | 4.13% | +2.04% |
 | RAM Used   | 10.57%  | 38.70% | +28.13% (2.34GB) |
 
-There are several component that are deployed as par of this solution. We measured the memory impact of the main ones (see below); these values have been gathered using the `top` command; please note that these metrics change slightly over time.
+> The exact commands run to obtain these metrics are the following:
+>
+> ```bash
+> # Sample CPU 10 times taking 1 sample per second
+> sar 1 10
+> 
+> # Sample memory 10 times taking 1 sample per second
+> sar -r 1 10
+> ```
+
+Several components are deployed as par of this solution. We measured the memory impact of the main ones (see below); these values have been gathered running the `top` command on the k8s node; please note that these metrics change slightly over time.
 
 | Process | Memory |
 | :---       | :----   |
