@@ -206,6 +206,13 @@ Several components are deployed as par of this solution. We measured the memory 
 | cdi-uploadproxy | 0.5% (44MB) |
 | libvirtd | 0.3% (27MB) |
 
+## Monitoring
+
+Extending Kubernetes monitoring to the KubeVirt deployment has three areas of interest, where you can further leverage Prometheus metrics endpoints into your current K8S monitoring solution. Some relevant resources:
+- KubeVirt component monitoring (built-in): https://kubevirt.io/user-guide/operations/component_monitoring/
+- Azure IoT Edge deployment on top of the VM: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-collect-and-transport-metrics?view=iotedge-2020-11&tabs=iothub and https://docs.microsoft.com/en-us/azure/iot-edge/how-to-observability?view=iotedge-2020-11
+- Monitoring inside the VM: you could use standard ways of monitoring a Linux host, for example by leveraging Promeetheus Node Exporter: https://prometheus.io/docs/guides/node-exporter/
+
 ## Technical References
 
 1. [NA KubeCon 2019](https://kubevirt.io/2020/KubeVirt_Intro-Virtual_Machine_Management_on_Kubernetes.html)
