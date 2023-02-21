@@ -38,14 +38,14 @@ Use the following Azure CLI commands to create AKS cluster with all the prerequi
 
     `az aks get-credentials -g IoTEdgeK8s -n IoTEdgeVMs`
 
-4. Deploy KubeVirt (v0.53.1)
+4. Deploy KubeVirt (v0.58.1)
 
 
     ```
     export RELEASE=v0.58.1 && kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-operator.yaml && kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-cr.yaml
     ```
 
-5. Deploy Containerized Data Importer (CDI)
+5. Deploy Containerized Data Importer (v1.55.2)
 
     ```
     export VERSION=v1.55.2 && kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-operator.yaml && kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-cr.yaml
