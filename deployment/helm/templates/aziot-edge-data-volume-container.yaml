@@ -9,7 +9,7 @@ metadata:
 spec:
   source:
     registry:
-      url: "docker://suneetnangia/ubuntu-container-disk:18.04"
+      url: "docker://veyalla/ubuntu-container-disk:2204-feb18_2023"
   pvc:
     accessModes:
       - ReadWriteOnce

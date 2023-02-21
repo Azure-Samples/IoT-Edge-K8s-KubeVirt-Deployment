@@ -30,15 +30,13 @@ spec:
               bus: sata
             name: cloudinitdisk
           interfaces:
-          - masquerade: {}
-            macAddress: {{ .Values.macAddress }}
-            name: default         
+          - bridge: {}
+            name: default
         machine:
           type: q35
         resources:
           requests:
-            # 4GB
-            memory: 4096M
+            memory: 2048M
       networks:
       - name: default
         pod: {}

@@ -1,5 +1,5 @@
 # VM's Data Volume size.
-aziotEdgeVmDiskSize: 4Gi
+aziotEdgeVmDiskSize: 16Gi
 
 # Flag to create K8s service/LB to allow ssh into the VM via public IP.
 aziotEdgeVmEnableExternalSsh: true
@@ -12,9 +12,6 @@ publicSshKey: ""
 
 # Config content for IoT Edge runtime.
 azIotEdgeConfig: ""
-
-# MAC address of VM instance
-macAddress: "fe:7e:48:a0:7d:22"
 
 # Root CA
 rootCA: ""

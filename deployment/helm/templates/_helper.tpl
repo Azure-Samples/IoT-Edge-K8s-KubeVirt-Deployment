@@ -36,7 +36,7 @@ ssh_authorized_keys:
 apt:
   sources:
     microsoft-prod.list:
-      source: "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/ubuntu/18.04/multiarch/prod bionic main"
+      source: "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/ubuntu/22.04/prod/ jammy main"
       key: |
         -----BEGIN PGP PUBLIC KEY BLOCK-----
         Version: GnuPG v1.4.7 (GNU/Linux)
@@ -57,7 +57,16 @@ apt:
         NdCFTW7wY0Fb1fWJ+/KTsC4=
         =J6gs
         -----END PGP PUBLIC KEY BLOCK-----
-
+packages:
+  - moby-cli
+  - moby-engine
+write_files:
+  - path: /etc/systemd/system/docker.service.d/override.conf
+    permissions: "0644"
+    content: |
+      [Service]
+      ExecStart=
+      ExecStart=/usr/bin/dockerd --host=fd:// --log-driver local
 bootcmd:
 # mount the Secret
   - "mkdir /mnt/app-secret"
@@ -66,8 +75,6 @@ bootcmd:
 # Once VM is started following command will install Moby Engine, IoT Edge and configure config.toml content from K8s secret.
 # There's a possibility to achieve the below package deployment via packages cloud-init construct instead but they don't run in order.
 runcmd:
-  - sudo apt-get update
-  - sudo apt-get install -y moby-engine
   - sudo apt-get update
   - sudo apt-get install -y aziot-edge
   - sudo cp /mnt/app-secret/userdata /etc/aziot/config.toml
