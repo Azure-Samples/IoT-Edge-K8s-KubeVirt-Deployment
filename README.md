@@ -40,11 +40,16 @@ Use the following Azure CLI commands to create AKS cluster with all the prerequi
 
 4. Deploy KubeVirt (v0.53.1)
 
-    `export RELEASE=v0.58.1 && kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-operator.yaml && kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-cr.yaml`
+
+    ```
+    export RELEASE=v0.58.1 && kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-operator.yaml && kubectl apply -f https://github.com/kubevirt/kubevirt/releases/download/${RELEASE}/kubevirt-cr.yaml
+    ```
 
 5. Deploy Containerized Data Importer (CDI)
 
-    `export VERSION=v1.55.2 && kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-operator.yaml && kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-cr.yaml`
+    ```
+    export VERSION=v1.55.2 && kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-operator.yaml && kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-cr.yaml
+    ```
 
 ## Deploying IoT Edge VM
 
