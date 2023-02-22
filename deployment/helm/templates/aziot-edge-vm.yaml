@@ -30,8 +30,9 @@ spec:
               bus: sata
             name: cloudinitdisk
           interfaces:
-          - bridge: {}
-            name: default
+          - masquerade: {}
+            macAddress: {{ .Values.macAddress }}
+            name: default  
         machine:
           type: q35
         resources:
