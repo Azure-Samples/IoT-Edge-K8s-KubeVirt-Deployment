@@ -13,6 +13,9 @@ publicSshKey: ""
 # Config content for IoT Edge runtime.
 azIotEdgeConfig: ""
 
+# MAC address of VM instance
+macAddress: "fe:7e:48:a0:7d:22"
+
 # Root CA
 rootCA: ""
 
